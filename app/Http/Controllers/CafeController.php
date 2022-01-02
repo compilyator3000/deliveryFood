@@ -2,23 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderEvent;
 use App\Http\Requests\CafeStoreRequest;
+use App\Http\Requests\CafeUpdateRequest;
 use App\Http\Resources\CafeResource;
 use App\Models\Cafe;
+use App\Models\Food;
+use App\Models\TelegramNotifier;
 use Illuminate\Http\Request;
 use \Illuminate\Http\Response;
+
 
 class CafeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-
+1
      */
     public function index()
     {
-        return  CafeResource::collection(Cafe::all());
-    }//Cafe::with("categories")
+
+       return  CafeResource::collection(Cafe::where("valid","=",'1')->get());
+    }
 
 
 
@@ -30,9 +36,10 @@ class CafeController extends Controller
      */
     public function store(CafeStoreRequest $request)
     {
-        $create_cafe = Cafe::create($request->validated());
-
-        return new CafeResource($create_cafe);
+        $temp=$request->validated();
+        $temp['password']=password_hash($temp['password'],PASSWORD_BCRYPT);
+        $create_cafe = Cafe::create($temp);
+        return \response()->json(new CafeResource($create_cafe),200,[],JSON_UNESCAPED_UNICODE| JSON_PRETTY_PRINT);
     }
 
     /**
@@ -43,40 +50,36 @@ class CafeController extends Controller
      */
     public function show($id)
     {
-        return  new CafeResource(Cafe::find($id));
+        $cafe=Cafe::where("valid","=",'1');
+        return  new CafeResource($cafe->findOrFail($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return CafeResource
      */
-    public function update(Request $request, $id)
+    public function update(CafeUpdateRequest  $request)
     {
-        //
+
+        $id=$request->user()->id;
+        Cafe::where("id", $id)->update($request->validated());
+        return new CafeResource(Cafe::find($id));
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Cafe|Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id=$request->user()->id;
+        Cafe::find($id)->delete();
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

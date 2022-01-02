@@ -16,11 +16,13 @@ class CreateCafesTable extends Migration
         Schema::create('cafes', function (Blueprint $table) {
             $table->id();
             $table->string("location","150");
-            $table->string("name","40");
+            $table->string("email","40");
             $table->boolean("status_of_working");
             $table->string("town","40");
             $table->text("description");
             $table->text("password");
+            $table->boolean("valid")->default(true);//провалидирывано ли адимином?
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class CafeFactory extends Factory
     {
         return [
             'location'=>$this->faker->streetName,
-            'name'=>$this->faker->company,
+            'email'=>$this->faker->company,
             'status_of_working'=>rand(0,1),
             'town'=>$this->faker->city,
             'description'=>$this->faker->text,

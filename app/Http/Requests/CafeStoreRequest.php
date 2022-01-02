@@ -24,7 +24,7 @@ class CafeStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|max:255',
+            'email'=>'required|max:255',
             'location'=>'required|max:255',
             'town'=>'required|max:255',
             'status_of_working'=>'required|max:255',
