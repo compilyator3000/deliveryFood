@@ -52,6 +52,7 @@ class CompanyController extends Controller
 
     public function destroy(Request $request)
     {
+       // dd("hello");
         $id = $request->user()->id;
         if ($this->companyService->destroyCompany($id)) {
             return response(null, Response::HTTP_NO_CONTENT);

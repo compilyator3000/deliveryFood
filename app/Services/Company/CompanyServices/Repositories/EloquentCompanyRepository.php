@@ -10,6 +10,8 @@ namespace App\Services\Company\CompanyServices\Repositories;
 
 use App\Http\Resources\Company\CompanyResource;
 use App\Models\Company;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class EloquentCompanyRepository
 {
@@ -25,12 +27,17 @@ class EloquentCompanyRepository
     }
 
 
-    public function createFromArray(array $data): CompanyResource
+    public function createFromArray(array $data)
     {
 
-        $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
-        $create_Company = Company::create($data);
-        return CompanyResource::make($create_Company);
+
+
+            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+            $create_Company = Company::create($data);
+            Log::alert();
+            return CompanyResource::make($create_Company);
+
+
     }
 
     public function updateFromArray(Company $company, array $data)

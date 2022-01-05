@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\Personnel::factory(10)->create();
-//        Company::factory()->count(5)->create();
+//       Company::factory()->count(5)->create();
 //        Category::factory()->count(40)->create();
 //        Dish::factory()->count(40)->create();
-        OrderItem::factory()->count(40)->create();
-        Order::factory()->count(40)->create();
+//        OrderItem::factory()->count(40)->create();
+//        Order::factory()->count(40)->create();
     }
 }
