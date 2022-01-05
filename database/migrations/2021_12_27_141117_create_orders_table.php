@@ -21,7 +21,8 @@ class CreateOrdersTable extends Migration
             $table->string("phone");
             $table->dateTime("deadline");
             $table->integer("delivery_type");//0 - самовывоз, 1 - на дом
-            $table->dateTime("result_sum");
+            $table->integer("result_sum");
+            $table->integer("company_id");
             $table->softDeletes();
             $table->timestamps();
         });

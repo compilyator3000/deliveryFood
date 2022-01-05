@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Database\Factories\CategoryFactory;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,30 +14,29 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $cafe_id
  * @property string $title
- * @property-read \App\Models\Cafe $cafe
- * @method static \Database\Factories\CategoryFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Category query()
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereCafeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Category whereTitle($value)
- * @mixin \Eloquent
+ * @property-read Dish $cafe
+ * @method static CategoryFactory factory(...$parameters)
+ * @method static Builder|Category newModelQuery()
+ * @method static Builder|Category newQuery()
+ * @method static Builder|Category query()
+ * @method static Builder|Category whereCafeId($value)
+ * @method static Builder|Category whereId($value)
+ * @method static Builder|Category whereTitle($value)
+ * @mixin Eloquent
  */
 class Category extends Model
 {
     use HasFactory;
-    public $timestamps=false;
-    protected $table="categories";
-protected $fillable=["cafe_id","title"];
-//    public function cafe(){
-//        return $this->hasMany(Food::class);
-//    }
 
-    public function food(){
-        return $this->hasMany(Food::class);
+    public $timestamps = false;
+    protected $table = "categories";
+    protected $fillable = ["company_id", "title"];
+
+
+    public function dish()
+    {
+        return $this->hasMany(Dish::class);
     }
-
 
 
 }

@@ -15,7 +15,7 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->foreignId("id")->autoIncrement();
-            $table->foreignId('cafe_id')->constrained()->onDelete("cascade");
+            $table->foreignId('company_id')->constrained()->onDelete("cascade");
             $table->string('title');
 
         });

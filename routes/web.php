@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CafeController;
-use App\Models\User;
+use App\Models\Personnel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +28,5 @@ Route::get("/",function (){
     return view("welcome");
 });
 Route::resource("/allcafe",CafeController::class);
-//[\App\Http\Controllers\UserController::class,"registration"]
+//[\App\Http\Controllers\PersonnelController::class,"registration"]
 

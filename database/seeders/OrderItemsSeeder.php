@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrderItem;
 use Illuminate\Database\Seeder;
 
 class OrderItemsSeeder extends Seeder
@@ -13,6 +14,6 @@ class OrderItemsSeeder extends Seeder
      */
     public function run()
     {
-        //
+
     }
 }

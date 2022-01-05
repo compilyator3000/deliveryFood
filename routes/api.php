@@ -1,63 +1,61 @@
 <?php
 
-use App\Http\Controllers\CafeController;
+use App\Http\Controllers\AdminControllers\AdminCategoryController;
+use App\Http\Controllers\AdminControllers\AdminCompanyController;
+use App\Http\Controllers\AdminControllers\AdminDishController;
+use App\Http\Controllers\AdminControllers\AdminOrderController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DishController;
 use App\Http\Controllers\OrderController;
-use App\Models\User;
+use App\Models\Personnel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+    Route::prefix("control")->middleware("auth_admin")->group(function(){
+        Route::resource("companies",AdminCompanyController::class);
+        Route::resource("categories",AdminCategoryController::class);
+        Route::resource("dishes",AdminDishController::class);
+        Route::resource("orders",AdminOrderController::class);
+
+    });
 
 
+Route:: resource("/companies", CompanyController::class)->only([
+    'index', 'show', 'store',]);
 
-//Route::get("/cafe",[CafeController::class,"index"]);
-//Route::get("/cafe/{id}",[CafeController::class,"show"]);
-//Route::post("/cafe/{id}",[CafeController::class,"show"]);
+Route:: resource("/categories", CategoryController::class)->only(
+    "index", 'show');
 
-
-//
-Route:: resource("/cafe",CafeController::class)->only([
-    'index', 'show', 'store', ]);
-
-Route:: resource("/category",CategoryController::class)->only(
-    "index",'show');//middleware("auth")->
-
-Route::middleware("auth")->group(function (){
+Route::middleware("auth")->group(function () {
 
 
-    Route:: resource("/cafe",CafeController::class)->only([
-        'update', 'destroy',  ]);
-    Route::resource("/food",\App\Http\Controllers\FoodController::class)->only("update","store",
+    Route:: resource("/companies", CompanyController::class)->only([
+        'update', 'destroy',]);
+    Route::resource("/dishes", DishController::class)->only("update", "store",
         "destroy");
-    Route:: resource("/category",CategoryController::class)->only(
-        "store",'update',"destroy");
-    Route::resource("/orders",OrderController::class)->except("store");
+    Route:: resource("/categories", CategoryController::class)->only(
+        "store", 'update', "destroy");
+    Route::resource("/orders", OrderController::class)->except("store");
 
 });
-Route::post("/orders",[OrderController::class,"store"]);
+Route::post("/orders", [OrderController::class, "store"]);
 
 
-Route::resource("/food",\App\Http\Controllers\FoodController::class)->only("index",
-"show");
-Route::resource("/food",\App\Http\Controllers\FoodController::class)->only("update",
+Route::resource("/dishes", DishController::class)->only("index",
+    "show");
+Route::resource("/dishes", DishController::class)->only("update",
     "destroy");
-
-
 
 
 Route::group([
     'prefix' => 'auth'
 ], function () {
-    Route::post('login', [\App\Http\Controllers\AuthController::class,"login"]);
-   // Route::post('registration', 'AuthController@registration');
-    //Route::post('logout', 'AuthController@logout');
-    //Route::post('refresh', 'AuthController@refresh');
-   //1 Route::post('me', 'AuthController@me');
+    Route::post('login', [AuthController::class, "login"]);
+
 });
 

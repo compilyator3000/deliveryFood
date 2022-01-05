@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Models;
 
+use Exception;
 use GuzzleHttp\Client;
 
 use GuzzleHttp\RequestOptions;
@@ -29,7 +31,7 @@ class TelegramNotifier
 
             ]);
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
 
             var_dump($e->getMessage());
 
