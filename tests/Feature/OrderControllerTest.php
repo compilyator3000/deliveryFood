@@ -14,7 +14,8 @@ class OrderControllerTest extends TestCase
 
     public function testCreateOrder()
     {
-        Event::fake();
+        //простой тестовый json
+        Event::fake();//тушим ивент с отправкой сообщения на телеграм
         $response = $this->json("post", '/api/orders', [
             "customer" => "kolya",
             "phone" => "050144141",

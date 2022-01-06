@@ -8,6 +8,9 @@ use Tests\TestCase;
 
 class CompanyControllerTest extends TestCase
 {
+    //пробовал прописать здесь jwt, прокидывать его тут и выполнять тесты, затея плохая потому что
+    //и тесты ложатся иногода чисто из-зи того что jwt просрочился и прокидывание занимает время. А мы ж то тесты
+    //пишем чтобы это время не занимать отладкой ручками:)
 //    use RefreshDatabase;
 //    /**
 //     * A basic feature test example.
@@ -29,14 +32,15 @@ class CompanyControllerTest extends TestCase
 
         $response->assertStatus(200);
     }
+
     public function testCreateCompany()
     {
         $response = $this->post('/api/companies', [
-            "email"=>"testcompany@gmail",
-            "password"=>"123",
-            "location"=>"Pushkina 12",
-            "town"=>"Chernigov",
-            "status_of_working"=>"1",
+            "email" => "testcompany@gmail",
+            "password" => "123",
+            "location" => "Pushkina 12",
+            "town" => "Chernigov",
+            "status_of_working" => "1",
             "description" => "test lorem ipsum"
         ]);
 

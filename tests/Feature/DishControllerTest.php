@@ -22,19 +22,6 @@ class DishControllerTest extends TestCase
 
         $response->assertStatus(200);
     }
-//    public function testCreateDish()
-//    {
-//        $response = $this->post('/api/dishes', [
-//            "category"=>"voluptatem",
-//            "title"=>"pizza",
-//            "weight"=>"100",
-//            "price"=>"100",
-//            "discount"=>"0",
-//            "active"=>"1",
-//            "description"=>"lorem ipsum"
-//        ]);
-//
-//        $response->assertStatus(201);
-//    }
+
 
 }
