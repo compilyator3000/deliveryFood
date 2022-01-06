@@ -9,6 +9,9 @@ namespace App\Services\Dish\DishServices\Repositories;
 
 
 use App\Models\Dish;
+use File;
+use Illuminate\Support\Facades\Storage;
+
 
 class EloquentDishRepository
 {
@@ -20,7 +23,10 @@ class EloquentDishRepository
 
     public function find(int $id)
     {
+       $image= Storage::disk("public")->get("storage/uploads/52.png");
+       dd($image);
         return Dish::findOrFail($id);
+
     }
 
 

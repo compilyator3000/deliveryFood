@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\Request;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
@@ -15,8 +16,9 @@ class CategoryControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testGetCategory()
+    public function testGetCategory(Request $request)
     {
+        dd($request->header("bearer"));
         $response = $this->get('/api/categories/1');
         $response->assertStatus(200);
     }

@@ -8,6 +8,7 @@ use App\Http\Resources\Company\CompanyResource;
 use App\Services\Control\Admin\AdminCompanyServices\CompanyInterfaces\AdminCompanyServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Log;
 
 
 class CompanyController extends Controller
@@ -25,6 +26,7 @@ class CompanyController extends Controller
 
     public function index()
     {
+        Log::info("get all company");
         return $this->companyService->getCompanies();
 
     }

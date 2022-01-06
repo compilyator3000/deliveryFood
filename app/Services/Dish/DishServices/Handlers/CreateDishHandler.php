@@ -28,6 +28,7 @@ class CreateDishHandler
         }
         $data["category_id"] = "$category->id";
         $data["company_id"] = "$category->company_id";
+
         return $this->dishRepository->createFromArray($data);
     }
 

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\StoreImageDishEvent;
 use App\Http\Requests\Dish\DishStoreRequest;
 use App\Services\Dish\DishInterfaces\DishServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class DishController extends Controller
 {
@@ -24,13 +27,20 @@ class DishController extends Controller
 
     public function show($id)
     {
+        // dd(Storage::path("uploads/52.png"));
+        // dd(Storage::get("http://localhost/storage/uploads/52.png"));
+        //dd (Storage::get(Storage::url("/uploads/52.png")));//
         return $this->dishService->findDish($id);
     }
 
 
     public function store(DishStoreRequest $request)
     {
-        return $this->dishService->createDish($request->user()->id, $request->toArray());
+
+        $request->file("image")->store("uploads", "public");
+        $dish = $this->dishService->createDish($request->user()->id, $request->toArray());
+        event(new StoreImageDishEvent($dish->id, $request->file("image")));
+        return $dish;
     }
 
     public function update(Request $request, $idDish)
