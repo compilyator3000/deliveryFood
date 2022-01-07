@@ -83,7 +83,7 @@ class CompanyControllerTest extends TestCase
     public function testUpdateCompany()
     {
         $company = (Company::all()->toArray())[0]["id"];
-
+// в запросе не отображается bearer token
         $response = $this->withHeaders([
             "Accept" => "application/json",
             "Authorisation"=> "Bearer " . HElp::$jwt])
