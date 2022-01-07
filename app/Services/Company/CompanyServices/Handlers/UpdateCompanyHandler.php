@@ -5,7 +5,8 @@ namespace App\Services\Company\CompanyServices\Handlers;
 
 
 use App\Models\Company;
-use App\Services\Control\Admin\AdminCompanyServices\CompanyServices\Repositories\EloquentCompanyRepository;
+use App\Services\Company\CompanyServices\Repositories\EloquentCompanyRepository;
+
 
 class UpdateCompanyHandler
 {

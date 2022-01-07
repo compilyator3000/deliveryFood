@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Company\CompanyStoreRequest;
 use App\Http\Requests\Company\CompanyUpdateRequest;
 use App\Http\Resources\Company\CompanyResource;
-use App\Services\Control\Admin\AdminCompanyServices\CompanyInterfaces\AdminCompanyServiceInterface;
+use App\Services\Company\CompanyInterfaces\CompanyServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Log;
@@ -16,7 +16,7 @@ class CompanyController extends Controller
     private $companyService;
 
     public function __construct(
-        AdminCompanyServiceInterface $companyService
+        CompanyServiceInterface $companyService
     )
     {
         $this->companyService = $companyService;
@@ -27,7 +27,7 @@ class CompanyController extends Controller
     public function index()
     {
         Log::info("get all company");
-        return $this->companyService->getCompanies();
+        return CompanyResource::collection($this->companyService->getCompanies());
 
     }
 
@@ -54,7 +54,7 @@ class CompanyController extends Controller
 
     public function destroy(Request $request)
     {
-       // dd("hello");
+        // dd("hello");
         $id = $request->user()->id;
         if ($this->companyService->destroyCompany($id)) {
             return response(null, Response::HTTP_NO_CONTENT);

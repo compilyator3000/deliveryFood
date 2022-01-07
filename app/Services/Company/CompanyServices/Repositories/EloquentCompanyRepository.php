@@ -34,7 +34,6 @@ class EloquentCompanyRepository
 
             $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
             $create_Company = Company::create($data);
-            Log::alert();
             return CompanyResource::make($create_Company);
 
 

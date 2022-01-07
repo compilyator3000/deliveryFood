@@ -23,7 +23,7 @@ class CreateCompaniesTable extends Migration
             $table->text("password");
             $table->softDeletes();
             $table->timestamps();
-$table->unique(["town","location"],"unique_location");
+//$table->unique(["town","location"],"unique_location");
         });
     }
 

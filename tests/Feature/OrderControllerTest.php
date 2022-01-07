@@ -12,36 +12,36 @@ class OrderControllerTest extends TestCase
 {
 
 
-    public function testCreateOrder()
-    {
-        //простой тестовый json
-        Event::fake();//тушим ивент с отправкой сообщения на телеграм
-        $response = $this->json("post", '/api/orders', [
-            "customer" => "kolya",
-            "phone" => "050144141",
-            "deadline" => "1640686406",
-            "delivery_type" => "1",
-            "data" => [
-                [
-                    "dish_id" => "1",
-                    "count" => "1"
-                ]
-                ,
-                [
-                    "dish_id" => 2,
-                    "count" => "1"
-                ]
-                ,
-                [
-                    "dish_id" => 3,
-                    "count" => "1"
-                ]
-
-            ]
-        ]);
-        Event::assertDispatched(OrderEvent::class);
-
-        $response->assertStatus(201);
-    }
+//    public function testCreateOrder()
+//    {
+//        //простой тестовый json
+//        Event::fake();//тушим ивент с отправкой сообщения на телеграм
+//        $response = $this->json("post", '/api/orders', [
+//            "customer" => "kolya",
+//            "phone" => "050144141",
+//            "deadline" => "1640686406",
+//            "delivery_type" => "1",
+//            "data" => [
+//                [
+//                    "dish_id" => "1",
+//                    "count" => "1"
+//                ]
+//                ,
+//                [
+//                    "dish_id" => 2,
+//                    "count" => "1"
+//                ]
+//                ,
+//                [
+//                    "dish_id" => 3,
+//                    "count" => "1"
+//                ]
+//
+//            ]
+//        ]);
+//        Event::assertDispatched(OrderEvent::class);
+//
+//        $response->assertStatus(201);
+//    }
 
 }

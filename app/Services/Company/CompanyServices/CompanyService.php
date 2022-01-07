@@ -3,11 +3,13 @@
 
 namespace App\Services\Company\CompanyServices;
 
-use App\Services\Control\Admin\AdminCompanyServices\CompanyInterfaces\AdminCompanyServiceInterface;
-use App\Services\Company\CompanyServices\Handlers\UpdateCompanyHandler;
-use App\Services\Control\Admin\AdminCompanyServices\CompanyServices\Repositories\EloquentCompanyRepository;
+use App\Services\Company\CompanyInterfaces\CompanyServiceInterface;
+use App\Services\Company\CompanyServices\Repositories\EloquentCompanyRepository;
 
-class AdminCompanyService implements AdminCompanyServiceInterface
+use App\Services\Company\CompanyServices\Handlers\UpdateCompanyHandler;
+
+
+class CompanyService implements CompanyServiceInterface
 {
     private $updateCompanyHandler;
     private $companyRepository;
@@ -39,6 +41,7 @@ class AdminCompanyService implements AdminCompanyServiceInterface
 
     public function findCompany(int $id)
     {
+
         return $this->companyRepository->find($id);
     }
 

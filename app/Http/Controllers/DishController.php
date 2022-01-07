@@ -27,9 +27,10 @@ class DishController extends Controller
 
     public function show($id)
     {
-        // dd(Storage::path("uploads/52.png"));
+        // dd(Storage::getItem("uploads/52.png"));
         // dd(Storage::get("http://localhost/storage/uploads/52.png"));
         //dd (Storage::get(Storage::url("/uploads/52.png")));//
+
         return $this->dishService->findDish($id);
     }
 

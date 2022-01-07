@@ -12,7 +12,7 @@ interface CompanyServiceInterface
 
     public function findCompany(int $id);
 
-    public function destroyCompany(int $id);
+    public function destroyCompany(int $id):bool;
 
 
 }

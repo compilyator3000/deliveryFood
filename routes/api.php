@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 
     Route::prefix("control")->middleware("auth_admin")->group(function(){
-        Route::resource("companies",AdminCompanyController::class);
-        Route::resource("categories",AdminCategoryController::class);
-        Route::resource("dishes",AdminDishController::class);
-        Route::resource("orders",AdminOrderController::class);
+        Route::resource("/companies",AdminCompanyController::class);
+        Route::resource("/categories",AdminCategoryController::class);
+        Route::resource("/dishes",AdminDishController::class);
+        Route::resource("/orders",AdminOrderController::class);
 
     });
 
