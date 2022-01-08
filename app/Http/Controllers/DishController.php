@@ -38,14 +38,16 @@ class DishController extends Controller
     public function store(DishStoreRequest $request)
     {
 
-        $request->file("image")->store("uploads", "public");
+        // $request->file("image")->store("uploads", "public");
         $dish = $this->dishService->createDish($request->user()->id, $request->toArray());
-        event(new StoreImageDishEvent($dish->id, $request->file("image")));
-        return $dish;
+        //  event(new StoreImageDishEvent($dish->id, $request->file("image")));
+        return response()->json($dish,201);
     }
 
     public function update(Request $request, $idDish)
     {
+        if (empty($request->user()->id))
+            return response()->json("Have not permission",401);
         $updated = $this->dishService->updateDish($request->user()->id, $idDish, $request->toArray());
         if ($updated == false) {
             return response()->json("Have not permission");
@@ -55,6 +57,8 @@ class DishController extends Controller
 
     public function destroy(Request $request, $idDish)
     {
+        if (empty($request->user()->id))
+            return response()->json("Have not permission",401);
         $deleted = $this->dishService->destroyDish($request->user()->id, $idDish);
         if ($deleted == false) {
             return response()->json("Have not permission or not have content");

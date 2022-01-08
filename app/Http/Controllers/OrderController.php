@@ -25,7 +25,10 @@ class OrderController extends Controller
 
     public function show(Request $request, $token)
     {
-        return $this->orderService->findOrder($request->user()->id, $token);
+        $order= $this->orderService->findOrder($request->user()->id, $token);
+        if($order==false)
+            return response()->json("not found",404);
+        return response()->json($order);
 
     }
 
@@ -35,6 +38,7 @@ class OrderController extends Controller
         $created = $this->orderService->createOrder($request->json()->all());
         if ($created) {
             event(new OrderEvent("You have a new order"));
+            return response()->json($created,201);
         }
         return $created;
 

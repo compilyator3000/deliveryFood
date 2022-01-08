@@ -52,9 +52,9 @@ class CategoryController extends Controller
     {
         $deleted = $this->categoryService->destroyCategory($request->user()->id, $id, $request->toArray());
         if ($deleted == false) {
-            return response()->json("Have not permission", 204);
+            return response()->json("Have not permission", 401);
         }
-        return response()->json($deleted, 200);
+        return response()->json($deleted, 204);
 
     }
 }

@@ -28,6 +28,7 @@ class UpdateCategoryHandler
         $category = Category::findOrFail($idCategory);
 
         if (Company::validCategory($category, $idCompany)) {
+
             return $this->CategoryRepository->updateFromArray(Category::findOrFail($idCategory), $data);
         }
         return false;

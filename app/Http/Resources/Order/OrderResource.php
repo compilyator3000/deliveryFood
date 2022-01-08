@@ -3,12 +3,16 @@
 namespace App\Http\Resources\Order;
 
 use App\Models\OrderItem;
+
 use Illuminate\Http\Resources\Json\JsonResource;
+
 
 class OrderResource extends JsonResource
 {
     public function toArray($request)
     {
+
+
         return [
             "token_order" => $this->token_order,
             "executed" => $this->executed,
@@ -18,7 +22,7 @@ class OrderResource extends JsonResource
             "delivery_type" => $this->delivery_type,
             "result_sum" => $this->result_sum,
 
-            "dishes" => OrderItem::query()->where("order_id", "=", $this->id)->get()->where("company_id", "=", $request->user()->id)
+            "dishes" => OrderItem::query()->where("order_id", "=", $this->id)->get()
 
 
         ];

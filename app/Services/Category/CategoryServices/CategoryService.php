@@ -6,6 +6,7 @@ namespace App\Services\Category\CategoryServices;
 use App\Services\Category\CategoryInterfaces\CategoryServiceInterface;
 use App\Services\Category\CategoryServices\Handlers\CreateCategoryHandler;
 use App\Services\Category\CategoryServices\Handlers\DestroyCategoryHandler;
+use App\Services\Category\CategoryServices\Handlers\UpdateCategoryHandler;
 use App\Services\Category\CategoryServices\Repositories\EloquentCategoryRepository;
 
 class CategoryService implements CategoryServiceInterface
@@ -17,7 +18,7 @@ class CategoryService implements CategoryServiceInterface
 
     public function __construct(
         EloquentCategoryRepository $repository,
-        DestroyCategoryHandler     $updateCategoryHandler,
+        UpdateCategoryHandler     $updateCategoryHandler,
         CreateCategoryHandler      $categoryHandler,
         DestroyCategoryHandler     $categoryDestroyHandler
 
@@ -37,6 +38,7 @@ class CategoryService implements CategoryServiceInterface
 
     public function updateCategory(int $idCompany, int $idCategory, array $data)
     {
+
         return $this->updateCategoryHandler->handle($idCompany, $idCategory, $data);
     }
 
