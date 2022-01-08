@@ -31,10 +31,13 @@ class EloquentCompanyRepository
     {
 
 
+        if (Company::where("email", "=", $data["email"])->exists()) {
+            return false;
+        }
 
-            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
-            $create_Company = Company::create($data);
-            return CompanyResource::make($create_Company);
+        $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+        $create_Company = Company::create($data);
+        return CompanyResource::make($create_Company);
 
 
     }
