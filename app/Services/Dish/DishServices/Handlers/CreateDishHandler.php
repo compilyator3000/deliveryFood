@@ -22,12 +22,17 @@ class CreateDishHandler
     public function handle($idCompany, array $data)//: Dish
     {
         $category = Category::where("company_id", "=", $idCompany)->get();
-        $category = $category->where("title", "=", $data["category"])->get(0);
+        $category = $category->where("title", "=", $data["category"])->all();
+        foreach ($category as $cat){
+            $category=$cat;
+        }
+
         if (empty($category)) {
             return false;
         }
         $data["category_id"] = "$category->id";
         $data["company_id"] = "$category->company_id";
+      //  dd($data);
 
         return $this->dishRepository->createFromArray($data);
     }

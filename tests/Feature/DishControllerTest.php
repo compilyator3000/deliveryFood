@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Events\StoreImageCompanyEvent;
 use App\Models\Category;
 use App\Models\Dish;
+use Event;
 use Tests\Generators\Dish\DishesGenerator;
 use Tests\JwtHelper\HElp;
 use Tests\TestCase;
@@ -34,7 +36,7 @@ class DishControllerTest extends TestCase
 
     public function testCreateDish()
     {
-
+Event::fake();
 
         $response = $this->withToken(HElp::$jwt)
             ->withHeader(
@@ -49,6 +51,7 @@ class DishControllerTest extends TestCase
                 "active" => "1",
 
             ]);
+        Event::dispatch(StoreImageCompanyEvent::class);
         $response->assertStatus(201);
     }
 

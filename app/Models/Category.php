@@ -30,7 +30,7 @@ class Category extends Model
 
     public $timestamps = false;
     protected $table = "categories";
-    protected $fillable = ["company_id", "title"];
+    protected $fillable = ["company_id", "title","id"];
 
 
     public function dish()

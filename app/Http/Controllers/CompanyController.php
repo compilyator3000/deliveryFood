@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\StoreImageCompanyEvent;
 use App\Http\Requests\Company\CompanyStoreRequest;
 use App\Http\Requests\Company\CompanyUpdateRequest;
 use App\Http\Resources\Company\CompanyResource;
 use App\Services\Company\CompanyInterfaces\CompanyServiceInterface;
+use File;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+
 use Log;
 
 
@@ -34,8 +37,10 @@ class CompanyController extends Controller
 
     public function store(CompanyStoreRequest $request)
     {
-
-        return \response()->json($this->companyService->createCompany($request->toArray()));
+        $company=$this->companyService->createCompany($request->toArray());
+        if(!empty($request->file("image")))
+            event(new StoreImageCompanyEvent($company->id, $request->file("image")));
+        return \response()->json();
     }
 
 

@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Queue\SerializesModels;
 
-class StoreImageDishEvent
+class StoreImageCompanyEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,9 +20,9 @@ class StoreImageDishEvent
      *
      * @return void
      */
-    public function __construct(int $dishId, UploadedFile $file)
+    public function __construct(int $companyId, UploadedFile $file)
     {
-        $file->storeAs("uploads/dishes","$dishId.png","public");
+        $file->storeAs("uploads/companies","$companyId.png","public");
     }
 
     /**
