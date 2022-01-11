@@ -32,30 +32,25 @@ Route:: resource("/categories", CategoryController::class)->only(
     "index", 'show');
 
 Route::middleware("auth")->group(function () {
-
-
     Route:: resource("/companies", CompanyController::class)->only([
         'update', 'destroy',]);
     Route::resource("/dishes", DishController::class)->only("update", "store",
         "destroy");
     Route:: resource("/categories", CategoryController::class)->only(
         "store", 'update', "destroy");
-    Route::resource("/orders", OrderController::class)->except("store");
-
+    Route::resource("/orders", OrderController::class)
+           ->except("store");
 });
 Route::post("/orders", [OrderController::class, "store"]);
 
-
-Route::resource("/dishes", DishController::class)->only("index",
-    "show");
-Route::resource("/dishes", DishController::class)->only("update",
-    "destroy");
-
+Route::resource("/dishes", DishController::class)
+       ->only("index","show");
+Route::resource("/dishes", DishController::class)
+       ->only("update","destroy");
 
 Route::group([
     'prefix' => 'auth'
 ], function () {
     Route::post('login', [AuthController::class, "login"]);
-
 });
 

@@ -27,6 +27,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get("/",function (){
     return view("welcome");
 });
-Route::resource("/allcafe",CafeController::class);
+
 //[\App\Http\Controllers\PersonnelController::class,"registration"]
 

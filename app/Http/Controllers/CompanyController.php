@@ -37,11 +37,11 @@ class CompanyController extends Controller
 
     public function store(CompanyStoreRequest $request)
     {
-        $company=$this->companyService->createCompany($request->toArray());
-        if($company==false){
-            return \response()->json("Company already exists",400);
+        $company = $this->companyService->createCompany($request->toArray());
+        if ($company == false) {
+            return \response()->json("Company already exists", 400);
         }
-        if(!empty($request->file("image")))
+        if (!empty($request->file("image")))
             event(new StoreImageCompanyEvent($company->id, $request->file("image")));
         return \response()->json();
     }

@@ -47,4 +47,5 @@ return $this->companyService->getCompanies();
     {
         return $this->companyService->destroyCompany($id);
     }
+
 }
